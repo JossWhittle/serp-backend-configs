@@ -1,0 +1,9 @@
+------------------------------------------------------------
+Date::09/27/21 Monday 18:29:53 UTC
+Host::154a5745475a
+Command::/opt/ibm/db2/V11.5/instance/db2icrt_local -a server -d -s ese -u db2fenc1 -p db2c_db2inst1 db2inst1
+Insttype::1
+Level::VRMF=11.5.6.0,Interim=0,SpecialInstall=0,SpecialBuild=,bld_level=s2106111000
+Message::DBI1070I Program db2icrt_local completed successfully.
+ReturnCode::0
+------------------------------------------------------------

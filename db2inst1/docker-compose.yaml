@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db2:
+    image: ibmcom/db2
+    ports:
+      - 50000:50000
+      - 55000:55000
+    environment:
+      DBNAME: "${DBNAME}"
+      DB2INST1_PASSWORD: "${DB2INST1_PASSWORD}"
+      LICENSE: "${LICENSE}"
+    volumes:
+      - /Users/alex/main/siwork/backend-configs/db2inst1:/database
+    restart: unless-stopped
