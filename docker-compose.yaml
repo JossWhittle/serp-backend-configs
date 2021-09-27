@@ -1,0 +1,55 @@
+version: '3'
+services:
+  db2:
+    image: ibmcom/db2
+    ports:
+      - "50000:50000"
+      - "55000:55000"
+    environment:
+      DBNAME: "${DBNAME}"
+      DB2INST1_PASSWORD: "${DB2INST1_PASSWORD}"
+      LICENSE: "${LICENSE}"
+    volumes:
+      - "${FILEPATH}/serp-backend-configs/db2inst1:/database"
+    restart: unless-stopped
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    user: root
+    environment:
+      SA_PASSWORD: "${DB2INST1_PASSWORD}"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "5434:1433"
+    volumes:
+      - "${FILEPATH}/serp-backend-configs/mssqlinst1/data:/var/opt/mssql/data"
+      - "${FILEPATH}/serp-backend-configs/mssqlinst1/log:/var/opt/mssql/log"
+      - "${FILEPATH}/serp-backend-configs/mssqlinst1/secrets:/var/opt/mssql/secrets"
+    restart: unless-stopped
+
+  postgres:
+    image: postgres
+    ports:
+      - "5438:5432"
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${DB2INST1_PASSWORD}"
+      POSTGRES_DB: "${DBNAME}"
+    volumes:
+      - "${FILEPATH}/serp-backend-configs/postgresinst1/data:/var/lib/postgresql/data"
+    restart: unless-stopped
+
+  ceph:
+    image: registry.redhat.io/rhceph/rhceph-4-rhel8
+    network_mode: "host"
+    environment:
+      MON_IP: "${MON_IP}"
+      CEPH_PUBLIC_NETWORK: "${CEPH_PUBLIC_NETWORK}"
+      CEPH_DEMO_UID: "${CEPH_DEMO_UID}"
+      CEPH_DEMO_ACCESS_KEY: "${CEPH_DEMO_ACCESS_KEY}"
+      CEPH_DEMO_SECRET_KEY: "${CEPH_DEMO_SECRET_KEY}"
+      CEPH_DAEMON: "DEMO"
+    volumes:
+      - "${FILEPATH}/serp-backend-configs/ceph/varlibceph:/var/lib/ceph:z"
+      - "${FILEPATH}/serp-backend-configs/ceph/etcceph:/etc/ceph:z"
+    restart: unless-stopped
