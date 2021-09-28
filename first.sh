@@ -7,3 +7,4 @@ sudo mkdir -p mssqlinst1/data/
 sudo mkdir -p mssqlinst1/log/
 sudo mkdir -p mssqlinst1/secrets/
 sudo mkdir -p postgresinst1/data/
+python3 data-generator.py

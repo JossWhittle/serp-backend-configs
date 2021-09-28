@@ -1,7 +1,8 @@
 version: '3'
 services:
   db2:
-    image: ibmcom/db2
+    build: ./db-startup-scripts/db2
+    privileged: true
     ports:
       - "50000:50000"
       - "55000:55000"
@@ -9,6 +10,7 @@ services:
       DBNAME: "${DBNAME}"
       DB2INST1_PASSWORD: "${DB2INST1_PASSWORD}"
       LICENSE: "${LICENSE}"
+      DB2INSTANCE: "${DB2INSTANCE}"
     volumes:
       - "${FILEPATH}/serp-backend-configs/db2inst1:/database"
     restart: unless-stopped
@@ -25,6 +27,9 @@ services:
       - "${FILEPATH}/serp-backend-configs/mssqlinst1/data:/var/opt/mssql/data"
       - "${FILEPATH}/serp-backend-configs/mssqlinst1/log:/var/opt/mssql/log"
       - "${FILEPATH}/serp-backend-configs/mssqlinst1/secrets:/var/opt/mssql/secrets"
+      - "${FILEPATH}/serp-backend-configs/db-startup-scripts/mssql:/usr/src/app"
+    working_dir: "/usr/src/app"
+    command: sh -c ' chmod +x ./mssql-entrypoint.sh; PASSWORD=${DB2INST1_PASSWORD} ./mssql-entrypoint.sh & /opt/mssql/bin/sqlservr;'
     restart: unless-stopped
 
   postgres:
@@ -37,6 +42,7 @@ services:
       POSTGRES_DB: "${DBNAME}"
     volumes:
       - "${FILEPATH}/serp-backend-configs/postgresinst1/data:/var/lib/postgresql/data"
+      - "${FILEPATH}/serp-backend-configs/db-startup-scripts/postgres:/docker-entrypoint-initdb.d"
     restart: unless-stopped
 
   ceph:
