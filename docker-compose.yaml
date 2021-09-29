@@ -46,7 +46,12 @@ services:
     restart: unless-stopped
 
   ceph:
-    image: registry.redhat.io/rhceph/rhceph-4-rhel8
+    build: 
+      context: ./db-startup-scripts/ceph
+      args:
+        AWS_ACCESS_KEY_ID: "${CEPH_DEMO_ACCESS_KEY}"
+        AWS_SECRET_ACCESS_KEY: "${CEPH_DEMO_SECRET_KEY}"
+        DEV_BUCKET: "${CEPH_DEV_BUCKET}"
     network_mode: "host"
     environment:
       MON_IP: "${MON_IP}"
@@ -55,6 +60,9 @@ services:
       CEPH_DEMO_ACCESS_KEY: "${CEPH_DEMO_ACCESS_KEY}"
       CEPH_DEMO_SECRET_KEY: "${CEPH_DEMO_SECRET_KEY}"
       CEPH_DAEMON: "DEMO"
+      AWS_ACCESS_KEY_ID: "${CEPH_DEMO_ACCESS_KEY}"
+      AWS_SECRET_ACCESS_KEY: "${CEPH_DEMO_SECRET_KEY}"
+      DEV_BUCKET: "${CEPH_DEV_BUCKET}"
     volumes:
       - "${FILEPATH}/serp-backend-configs/ceph/varlibceph:/var/lib/ceph:z"
       - "${FILEPATH}/serp-backend-configs/ceph/etcceph:/etc/ceph:z"

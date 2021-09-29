@@ -141,7 +141,7 @@ if __name__ == "__main__":
     wlgpregdf = pd.DataFrame(wlgp_reg, columns=['alf', 'start_dt', 'end_dt'])
     wlgpeventdf = pd.DataFrame(wlgp_event, columns=['alf', 'gndr_cd', 'wob', 'event_dt', 'event_cd'])
 
-    fpaths = ['db2', 'mssql', 'postgres']
+    fpaths = ['db2', 'mssql', 'postgres', 'ceph']
     for path in fpaths:
         pri_string = 'db-startup-scripts/{0}/data/'.format(path)
         path_str = os.path.join(dir, pri_string)
