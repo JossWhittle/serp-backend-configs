@@ -1,0 +1,47 @@
+Attaching to serp-backend-configs_nginx_1, serp-backend-configs_minio1_1, serp-backend-configs_minio2_1
+[36mminio1_1  |[0m Waiting for all MinIO sub-systems to be initialized.. lock acquired
+[36mminio1_1  |[0m Automatically configured API requests per node based on available memory on the system: 58
+[36mminio1_1  |[0m All MinIO sub-systems initialized successfully
+[36mminio1_1  |[0m Waiting for all MinIO IAM sub-system to be initialized.. lock acquired
+[36mminio1_1  |[0m Status:         8 Online, 0 Offline. 
+[36mminio1_1  |[0m API: http://192.168.176.3:9000  http://127.0.0.1:9000 
+[36mminio1_1  |[0m 
+[36mminio1_1  |[0m Console: http://192.168.176.3:9001 http://127.0.0.1:9001 
+[36mminio1_1  |[0m 
+[36mminio1_1  |[0m Documentation: https://docs.min.io
+[33mminio2_1  |[0m Waiting for all MinIO sub-systems to be initialized.. lock acquired
+[33mminio2_1  |[0m Automatically configured API requests per node based on available memory on the system: 57
+[33mminio2_1  |[0m All MinIO sub-systems initialized successfully
+[33mminio2_1  |[0m Waiting for all MinIO IAM sub-system to be initialized.. lock acquired
+[33mminio2_1  |[0m Status:         8 Online, 0 Offline. 
+[33mminio2_1  |[0m API: http://192.168.176.4:9000  http://127.0.0.1:9000 
+[33mminio2_1  |[0m 
+[33mminio2_1  |[0m Console: http://192.168.176.4:9001 http://127.0.0.1:9001 
+[33mminio2_1  |[0m 
+[33mminio2_1  |[0m Documentation: https://docs.min.io
+[32mnginx_1   |[0m /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+[32mnginx_1   |[0m /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+[32mnginx_1   |[0m /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+[32mnginx_1   |[0m 10-listen-on-ipv6-by-default.sh: Getting the checksum of /etc/nginx/conf.d/default.conf
+[32mnginx_1   |[0m 10-listen-on-ipv6-by-default.sh: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+[32mnginx_1   |[0m /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+[32mnginx_1   |[0m /docker-entrypoint.sh: Configuration complete; ready for start up
+[32mnginx_1   |[0m 192.168.176.1 - - [30/Sep/2021:14:36:20 +0000] "GET / HTTP/1.1" 307 57 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0" "-"
+[32mnginx_1   |[0m 192.168.176.1 - - [30/Sep/2021:14:36:20 +0000] "GET / HTTP/1.1" 200 3087 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0" "-"
+[32mnginx_1   |[0m 192.168.176.1 - - [30/Sep/2021:14:36:21 +0000] "GET /styles/root-styles.css HTTP/1.1" 200 1082 "http://127.0.0.1:9001/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0" "-"
+[32mnginx_1   |[0m 192.168.176.1 - - [30/Sep/2021:14:36:21 +0000] "GET /static/css/main.8cfac526.chunk.css HTTP/1.1" 200 5949 "http://127.0.0.1:9001/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0" "-"
+[32mnginx_1   |[0m 192.168.176.1 - - [30/Sep/2021:14:36:21 +0000] "GET /static/css/2.60e04a19.chunk.css HTTP/1.1" 200 5061 "http://127.0.0.1:9001/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0" "-"
+[32mnginx_1   |[0m 192.168.176.1 - - [30/Sep/2021:14:36:21 +0000] "GET /static/js/2.44b3a3b4.chunk.js HTTP/1.1" 200 1741999 "http://127.0.0.1:9001/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0" "-"
+[32mnginx_1   |[0m 192.168.176.1 - - [30/Sep/2021:14:36:21 +0000] "GET /static/js/main.7222c23e.chunk.js HTTP/1.1" 200 790130 "http://127.0.0.1:9001/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0" "-"
+[32mnginx_1   |[0m 192.168.176.1 - - [30/Sep/2021:14:36:21 +0000] "GET /api/v1/session HTTP/1.1" 200 456 "http://127.0.0.1:9001/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0" "-"
+[32mnginx_1   |[0m 192.168.176.1 - - [30/Sep/2021:14:36:21 +0000] "GET /api/v1/admin/info HTTP/1.1" 200 2721 "http://127.0.0.1:9001/dashboard" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0" "-"
+Attaching to serp-backend-configs_nginx_1, serp-backend-configs_minio2_1, serp-backend-configs_minio1_1
+[32mnginx_1   |[0m /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+[32mnginx_1   |[0m /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+[32mnginx_1   |[0m /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+[32mnginx_1   |[0m 10-listen-on-ipv6-by-default.sh: Getting the checksum of /etc/nginx/conf.d/default.conf
+[32mnginx_1   |[0m 10-listen-on-ipv6-by-default.sh: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+[32mnginx_1   |[0m /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+[32mnginx_1   |[0m /docker-entrypoint.sh: Configuration complete; ready for start up
+[33mminio2_1  |[0m ERROR Unable to initialize backend: http://minio1:9000/data1 disk is already being used in another erasure deployment. (Number of disks specified: 4 but the number of disks found in the 1st disk's format.json: 8)
+[36mminio1_1  |[0m ERROR Unable to initialize backend: /data1 disk is already being used in another erasure deployment. (Number of disks specified: 4 but the number of disks found in the 1st disk's format.json: 8)

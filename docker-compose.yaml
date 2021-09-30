@@ -3,7 +3,8 @@ version: '3'
 # Settings and configurations that are common for all containers
 x-minio-common: &minio-common
   image: quay.io/minio/minio:RELEASE.2021-09-24T00-24-24Z
-  command: server --console-address ":9001" http://minio{1...4}/data{1...2}
+  #command: server --console-address ":9001" http://minio{1...4}/data{1...2}
+  command: server --console-address ":9001" http://minio{1...2}/data{1...2}
   expose:
     - "9000"
     - "9001"
@@ -36,95 +37,95 @@ services:
       - "./minio/data2-1:/data1"
       - "./minio/data2-2:/data2"
 
-  minio3:
-    <<: *minio-common
-    hostname: minio3
-    volumes:
-      - "./minio/data3-1:/data1"
-      - "./minio/data3-2:/data2"
+  # minio3:
+  #   <<: *minio-common
+  #   hostname: minio3
+  #   volumes:
+  #     - "./minio/data3-1:/data1"
+  #     - "./minio/data3-2:/data2"
 
-  minio4:
-    <<: *minio-common
-    hostname: minio4
-    volumes:
-      - "./minio/data4-1:/data1"
-      - "./minio/data4-2:/data2"
+  # minio4:
+  #   <<: *minio-common
+  #   hostname: minio4
+  #   volumes:
+  #     - "./minio/data4-1:/data1"
+  #     - "./minio/data4-2:/data2"
 
   nginx:
     image: nginx:1.19.2-alpine
     hostname: nginx
     volumes:
-      - "${FILEPATH}/serp-backend-configs/db-startup-scripts/minio/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "./db-startup-scripts/minio/nginx.conf:/etc/nginx/nginx.conf:ro"
     ports:
       - "9000:9000"
       - "9001:9001"
     depends_on:
       - minio1
       - minio2
-      - minio3
-      - minio4
+      # - minio3
+      # - minio4
 
-  create_buckets:
-    image: minio/mc:RELEASE.2019-07-17T22-13-42Z
-    network_mode: host
-    depends_on:
-      - minio1
-      - minio2
-      - minio3
-      - minio4
-    environment:
-      MINIO_ROOT_USER: "${POSTGRES_USER}"
-      MINIO_ROOT_PASSWORD: "${DB2INST1_PASSWORD}"
-    entrypoint: >
-      /bin/sh -c "
-      /usr/bin/mc config host add myminio http://127.0.0.1:9000 ${MINIO_ACCESS_KEY} ${MINIO_SECRET_KEY};
-      /usr/bin/mc rm -r --force myminio/somebucketname;
-      /usr/bin/mc mb myminio/somebucketname;
-      /usr/bin/mc policy download myminio/somebucketname;
-      exit 0;
-      "
+  # create_buckets:
+  #   image: minio/mc:RELEASE.2019-07-17T22-13-42Z
+  #   network_mode: host
+  #   depends_on:
+  #     - minio1
+  #     - minio2
+  #     - minio3
+  #     - minio4
+  #   environment:
+  #     MINIO_ROOT_USER: "${POSTGRES_USER}"
+  #     MINIO_ROOT_PASSWORD: "${DB2INST1_PASSWORD}"
+  #   entrypoint: >
+  #     /bin/sh -c "
+  #     /usr/bin/mc config host add myminio http://127.0.0.1:9000 ${MINIO_ACCESS_KEY} ${MINIO_SECRET_KEY};
+  #     /usr/bin/mc rm -r --force myminio/somebucketname;
+  #     /usr/bin/mc mb myminio/somebucketname;
+  #     /usr/bin/mc policy download myminio/somebucketname;
+  #     exit 0;
+  #     "
 
-  db2:
-    build: ./db-startup-scripts/db2
-    privileged: true
-    ports:
-      - "50000:50000"
-      - "55000:55000"
-    environment:
-      DBNAME: "${DBNAME}"
-      DB2INST1_PASSWORD: "${DB2INST1_PASSWORD}"
-      LICENSE: "${LICENSE}"
-      DB2INSTANCE: "${DB2INSTANCE}"
-    volumes:
-      - "${FILEPATH}/serp-backend-configs/db2inst1:/database"
-    restart: unless-stopped
+  # db2:
+  #   build: ./db-startup-scripts/db2
+  #   privileged: true
+  #   ports:
+  #     - "50000:50000"
+  #     - "55000:55000"
+  #   environment:
+  #     DBNAME: "${DBNAME}"
+  #     DB2INST1_PASSWORD: "${DB2INST1_PASSWORD}"
+  #     LICENSE: "${LICENSE}"
+  #     DB2INSTANCE: "${DB2INSTANCE}"
+  #   volumes:
+  #     - "./db2inst1:/database"
+  #   restart: unless-stopped
 
-  mssql:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    user: root
-    environment:
-      SA_PASSWORD: "${DB2INST1_PASSWORD}"
-      ACCEPT_EULA: "Y"
-    ports:
-      - "5434:1433"
-    volumes:
-      - "${FILEPATH}/serp-backend-configs/mssqlinst1/data:/var/opt/mssql/data"
-      - "${FILEPATH}/serp-backend-configs/mssqlinst1/log:/var/opt/mssql/log"
-      - "${FILEPATH}/serp-backend-configs/mssqlinst1/secrets:/var/opt/mssql/secrets"
-      - "${FILEPATH}/serp-backend-configs/db-startup-scripts/mssql:/usr/src/app"
-    working_dir: "/usr/src/app"
-    command: sh -c ' chmod +x ./mssql-entrypoint.sh; PASSWORD=${DB2INST1_PASSWORD} ./mssql-entrypoint.sh & /opt/mssql/bin/sqlservr;'
-    restart: unless-stopped
+  # mssql:
+  #   image: mcr.microsoft.com/mssql/server:2019-latest
+  #   user: root
+  #   environment:
+  #     SA_PASSWORD: "${DB2INST1_PASSWORD}"
+  #     ACCEPT_EULA: "Y"
+  #   ports:
+  #     - "5434:1433"
+  #   volumes:
+  #     - "./mssqlinst1/data:/var/opt/mssql/data"
+  #     - "./mssqlinst1/log:/var/opt/mssql/log"
+  #     - "./mssqlinst1/secrets:/var/opt/mssql/secrets"
+  #     - "./db-startup-scripts/mssql:/usr/src/app"
+  #   working_dir: "/usr/src/app"
+  #   command: sh -c ' chmod +x ./mssql-entrypoint.sh; PASSWORD=${DB2INST1_PASSWORD} ./mssql-entrypoint.sh & /opt/mssql/bin/sqlservr;'
+  #   restart: unless-stopped
 
-  postgres:
-    image: postgres
-    ports:
-      - "5438:5432"
-    environment:
-      POSTGRES_USER: "${POSTGRES_USER}"
-      POSTGRES_PASSWORD: "${DB2INST1_PASSWORD}"
-      POSTGRES_DB: "${DBNAME}"
-    volumes:
-      - "${FILEPATH}/serp-backend-configs/postgresinst1/data:/var/lib/postgresql/data"
-      - "${FILEPATH}/serp-backend-configs/db-startup-scripts/postgres:/docker-entrypoint-initdb.d"
-    restart: unless-stopped
+  # postgres:
+  #   image: postgres
+  #   ports:
+  #     - "5438:5432"
+  #   environment:
+  #     POSTGRES_USER: "${POSTGRES_USER}"
+  #     POSTGRES_PASSWORD: "${DB2INST1_PASSWORD}"
+  #     POSTGRES_DB: "${DBNAME}"
+  #   volumes:
+  #     - "./postgresinst1/data:/var/lib/postgresql/data"
+  #     - "./db-startup-scripts/postgres:/docker-entrypoint-initdb.d"
+  #   restart: unless-stopped
