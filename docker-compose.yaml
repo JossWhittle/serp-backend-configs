@@ -3,8 +3,7 @@ version: '3'
 # Settings and configurations that are common for all containers
 x-minio-common: &minio-common
   image: quay.io/minio/minio:RELEASE.2021-09-24T00-24-24Z
-  #command: server --console-address ":9001" http://minio{1...4}/data{1...2}
-  command: server --console-address ":9001" http://minio{1...2}/data{1...2}
+  command: server --console-address ":9001" http://minio{1...4}/data{1...2}
   expose:
     - "9000"
     - "9001"
@@ -26,30 +25,30 @@ services:
   minio1:
     <<: *minio-common
     hostname: minio1
-    volumes:
-      - "./minio/data1-1:/data1"
-      - "./minio/data1-2:/data2"
+    # volumes:
+    #   - "./minio/data1-1:/data1"
+    #   - "./minio/data1-2:/data2"
 
   minio2:
     <<: *minio-common
     hostname: minio2
-    volumes:
-      - "./minio/data2-1:/data1"
-      - "./minio/data2-2:/data2"
+    # volumes:
+    #   - "./minio/data2-1:/data1"
+    #   - "./minio/data2-2:/data2"
 
-  # minio3:
-  #   <<: *minio-common
-  #   hostname: minio3
-  #   volumes:
-  #     - "./minio/data3-1:/data1"
-  #     - "./minio/data3-2:/data2"
+  minio3:
+    <<: *minio-common
+    hostname: minio3
+    # volumes:
+    #   - "./minio/data3-1:/data1"
+    #   - "./minio/data3-2:/data2"
 
-  # minio4:
-  #   <<: *minio-common
-  #   hostname: minio4
-  #   volumes:
-  #     - "./minio/data4-1:/data1"
-  #     - "./minio/data4-2:/data2"
+  minio4:
+    <<: *minio-common
+    hostname: minio4
+    # volumes:
+    #   - "./minio/data4-1:/data1"
+    #   - "./minio/data4-2:/data2"
 
   nginx:
     image: nginx:1.19.2-alpine
@@ -62,8 +61,8 @@ services:
     depends_on:
       - minio1
       - minio2
-      # - minio3
-      # - minio4
+      - minio3
+      - minio4
 
   # create_buckets:
   #   image: minio/mc:RELEASE.2019-07-17T22-13-42Z

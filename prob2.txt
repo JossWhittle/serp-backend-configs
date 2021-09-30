@@ -1,0 +1,52 @@
+Attaching to serp-backend-configs_nginx_1, serp-backend-configs_minio4_1, serp-backend-configs_minio2_1, serp-backend-configs_minio3_1, serp-backend-configs_minio1_1
+[32mminio3_1  |[0m Waiting for the first server to format the disks.
+[32mminio3_1  |[0m Waiting for all MinIO sub-systems to be initialized.. lock acquired
+[32mminio3_1  |[0m Automatically configured API requests per node based on available memory on the system: 56
+[32mminio3_1  |[0m All MinIO sub-systems initialized successfully
+[32mminio3_1  |[0m Waiting for all MinIO IAM sub-system to be initialized.. lock acquired
+[32mminio3_1  |[0m Status:         8 Online, 0 Offline. 
+[32mminio3_1  |[0m API: http://192.168.208.4:9000  http://127.0.0.1:9000 
+[32mminio3_1  |[0m 
+[32mminio3_1  |[0m Console: http://192.168.208.4:9001 http://127.0.0.1:9001 
+[32mminio3_1  |[0m 
+[32mminio3_1  |[0m Documentation: https://docs.min.io
+[33mminio2_1  |[0m Waiting for the first server to format the disks.
+[33mminio2_1  |[0m Waiting for all MinIO sub-systems to be initialized.. lock acquired
+[33mminio2_1  |[0m Automatically configured API requests per node based on available memory on the system: 56
+[33mminio2_1  |[0m All MinIO sub-systems initialized successfully
+[33mminio2_1  |[0m Waiting for all MinIO IAM sub-system to be initialized.. lock acquired
+[33mminio2_1  |[0m Status:         8 Online, 0 Offline. 
+[33mminio2_1  |[0m API: http://192.168.208.3:9000  http://127.0.0.1:9000 
+[33mminio2_1  |[0m 
+[33mminio2_1  |[0m Console: http://192.168.208.3:9001 http://127.0.0.1:9001 
+[33mminio2_1  |[0m 
+[33mminio2_1  |[0m Documentation: https://docs.min.io
+[35mminio4_1  |[0m Waiting for the first server to format the disks.
+[35mminio4_1  |[0m Waiting for all MinIO sub-systems to be initialized.. lock acquired
+[35mminio4_1  |[0m Automatically configured API requests per node based on available memory on the system: 55
+[35mminio4_1  |[0m All MinIO sub-systems initialized successfully
+[35mminio4_1  |[0m Waiting for all MinIO IAM sub-system to be initialized.. lock acquired
+[35mminio4_1  |[0m Status:         8 Online, 0 Offline. 
+[35mminio4_1  |[0m API: http://192.168.208.5:9000  http://127.0.0.1:9000 
+[35mminio4_1  |[0m 
+[35mminio4_1  |[0m Console: http://192.168.208.5:9001 http://127.0.0.1:9001 
+[35mminio4_1  |[0m 
+[35mminio4_1  |[0m Documentation: https://docs.min.io
+[36mminio1_1  |[0m Formatting 1st pool, 1 set(s), 8 drives per set.
+[36mminio1_1  |[0m Waiting for all MinIO sub-systems to be initialized.. lock acquired
+[36mminio1_1  |[0m Automatically configured API requests per node based on available memory on the system: 57
+[36mminio1_1  |[0m All MinIO sub-systems initialized successfully
+[36mminio1_1  |[0m Waiting for all MinIO IAM sub-system to be initialized.. lock acquired
+[36mminio1_1  |[0m Status:         8 Online, 0 Offline. 
+[36mminio1_1  |[0m API: http://192.168.208.2:9000  http://127.0.0.1:9000 
+[36mminio1_1  |[0m 
+[36mminio1_1  |[0m Console: http://192.168.208.2:9001 http://127.0.0.1:9001 
+[36mminio1_1  |[0m 
+[36mminio1_1  |[0m Documentation: https://docs.min.io
+[34mnginx_1   |[0m /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+[34mnginx_1   |[0m /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+[34mnginx_1   |[0m /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+[34mnginx_1   |[0m 10-listen-on-ipv6-by-default.sh: Getting the checksum of /etc/nginx/conf.d/default.conf
+[34mnginx_1   |[0m 10-listen-on-ipv6-by-default.sh: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+[34mnginx_1   |[0m /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+[34mnginx_1   |[0m /docker-entrypoint.sh: Configuration complete; ready for start up
